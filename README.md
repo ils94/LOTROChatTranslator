@@ -33,8 +33,12 @@ You can also use QuickTranslator.exe for a quick Google Translate on your PC!
 
 Just select the language you want to translate the message into, hit Enter, and paste it into the in-game chat!
 
-# download
+# Download
 
 You can download the tool from this link: 
 
 https://github.com/ils94/LOTROChatTranslator/releases/download/release/LOTROChatTranslator.zip
+
+# Video Demo
+
+[Demo](https://streamable.com/6xqwl0)
