@@ -41,4 +41,4 @@ https://github.com/ils94/LOTROChatTranslator/releases/download/release/LOTROChat
 
 # Video Demo
 
-[Demo](https://streamable.com/6xqwl0)
+[This demo does not represent the final version.](https://streamable.com/6xqwl0)
