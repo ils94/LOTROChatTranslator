@@ -5,6 +5,7 @@ import warnings
 import world_chat
 import IMs_chat
 import fellowship_chat
+import kinship_chat
 
 warnings.filterwarnings("ignore", ".*64-bit application should be automated using 64-bit Python.*")
 
@@ -19,7 +20,7 @@ def main():
         print("")
         print("1- World Chat")
         print("2- Fellowship Chat")
-        print("3- Guild Chat")
+        print("3- Kinship Chat")
         print("4- IMs Chat")
         print("")
         chat = input("Choice: ")
@@ -89,6 +90,13 @@ def main():
         elif chat == '2':
             messages = fellowship_chat.return_text_fellowship(path)
             new_translations = fellowship_chat.translate_messages_fellowship(lang, messages, translated_messages)
+
+            for msg in new_translations:
+                print(msg)
+
+        elif chat == '3':
+            messages = kinship_chat.return_text_kinship(path)
+            new_translations = kinship_chat.translate_messages_kinship(lang, messages, translated_messages)
 
             for msg in new_translations:
                 print(msg)
