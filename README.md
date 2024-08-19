@@ -6,13 +6,13 @@ Works with: World, Fellowship, Kinship and IMs chats!
 
 # How to use it
 
-For World Chat, you need to go to your settings and enable Chat Timestamps.
+For World Chat (as well as Fellowship and Kinship), you need to go to your settings and enable Chat Timestamps.
 
 Then, right-click the World Chat tab, select Chat Logging, and choose Start Logging.
 
 Open LOTROChatTranslator.exe, then:
 
-- Select "1- for World Chat"
+- Select "1- World Chat"
 - Go to: `C:\Users\YOURUSER\Documents\The Lord of the Rings Online`
 - Drag and drop your `World_#######_#.txt` log file into the LOTROChatTranslator.exe window.
 - Hit Enter.
