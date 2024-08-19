@@ -2,7 +2,7 @@
 
 This is a simple Python program that uses the Google Translate API to translate your chats in real-time!
 
-It has only been tested with World Chat and IMs.
+Works with: World, Fellowship, Kinship and IMs chats!
 
 # How to use it
 
