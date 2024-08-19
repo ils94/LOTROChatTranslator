@@ -35,6 +35,9 @@ def return_text(file_path, start_line=None):
 
 
 def translate_messages(lang, messages, processed_timestamps):
+    playername = ''
+    text = ''
+
     translator = Translator(service_urls=['translate.googleapis.com'])
     new_translations = []
 
@@ -42,9 +45,6 @@ def translate_messages(lang, messages, processed_timestamps):
         if timestamp not in processed_timestamps:
             if ': ' in message:
                 playername, text = message.split(': ', 1)
-            else:
-                playername = '[Unknown Player]'
-                text = message
 
             x = translator.translate(text, dest=lang)
             translated_message = f"[{timestamp}] {playername}: {x.text}'"
