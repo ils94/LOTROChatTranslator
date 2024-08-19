@@ -15,8 +15,10 @@ def main():
 
     while True:
         print("Choose one type of chat to translate:")
+        print("")
         print("1- World Chat")
         print("2- IMs")
+        print("")
         chat = input("Choice: ")
 
         os.system('cls')
