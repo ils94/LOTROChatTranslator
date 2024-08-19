@@ -1,15 +1,14 @@
 import time
 import os
-import ctypes
-import warnings
 import world_chat
 import IMs_chat
 import fellowship_chat
 import kinship_chat
+import window_config
 
-warnings.filterwarnings("ignore", ".*64-bit application should be automated using 64-bit Python.*")
+window_title = 'LOTRO Chat Translator'
 
-ctypes.windll.kernel32.SetConsoleTitleW("LOTRO Chat Translator")
+window_config.window_always_on_top(window_title)
 
 
 def main():
