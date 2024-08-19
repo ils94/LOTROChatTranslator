@@ -1,57 +1,12 @@
-from googletrans import Translator
 import time
 import os
 import ctypes
 import warnings
+import world_chat
 
 warnings.filterwarnings("ignore", ".*64-bit application should be automated using 64-bit Python.*")
 
 ctypes.windll.kernel32.SetConsoleTitleW("LOTRO Chat Translator")
-
-
-def return_text(file_path, start_line=None):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-
-        if start_line is not None:
-            lines = lines[start_line:]
-        last_lines = lines[-10:]
-
-    messages = []
-
-    for line in last_lines:
-        if '[To World]' in line:
-            continue
-
-        parts = line.split('] ', 1)
-
-        if len(parts) > 1:
-            timestamp = parts[0].strip('[] ')
-            player_message = parts[1].strip().strip("'")
-
-            messages.append((timestamp, player_message))
-
-    return messages
-
-
-def translate_messages(lang, messages, processed_timestamps):
-    playername = ''
-    text = ''
-
-    translator = Translator(service_urls=['translate.googleapis.com'])
-    new_translations = []
-
-    for timestamp, message in messages:
-        if timestamp not in processed_timestamps:
-            if ': ' in message:
-                playername, text = message.split(': ', 1)
-
-            x = translator.translate(text, dest=lang)
-            translated_message = f"[{timestamp}] {playername}: {x.text}'"
-            processed_timestamps.add(timestamp)
-            new_translations.append(translated_message)
-
-    return new_translations
 
 
 def main():
@@ -101,9 +56,9 @@ def main():
     processed_timestamps = set()
 
     while True:
-        messages = return_text(path)
+        messages = world_chat.return_text_world(path)
 
-        new_translations = translate_messages(lang, messages, processed_timestamps)
+        new_translations = world_chat.translate_messages_world(lang, messages, processed_timestamps)
 
         for msg in new_translations:
             print(msg)
