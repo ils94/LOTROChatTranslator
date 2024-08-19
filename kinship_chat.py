@@ -12,7 +12,7 @@ def return_text_kinship(file_path, start_line=None):
     messages = []
 
     for line in last_lines:
-        if '[To Kinship]' in line or 'has come online.' in line or 'has come offline.' in line:
+        if '[To Kinship]' in line or 'has come online.' in line or 'has gone offline.' in line:
             continue
 
         parts = line.split('] ', 1)
@@ -39,7 +39,7 @@ def translate_messages_kinship(lang, messages, processed_timestamps):
                 playername, text = message.split(': ', 1)
 
             x = translator.translate(text, dest=lang)
-            translated_message = f"[{timestamp}] {playername}: {x.text}'"
+            translated_message = f"[{timestamp}] {playername}: '{x.text}'"
             processed_timestamps.add(timestamp)
             new_translations.append(translated_message)
 
