@@ -3,6 +3,7 @@ import os
 import ctypes
 import warnings
 import world_chat
+import IMs_chat
 
 warnings.filterwarnings("ignore", ".*64-bit application should be automated using 64-bit Python.*")
 
@@ -10,6 +11,22 @@ ctypes.windll.kernel32.SetConsoleTitleW("LOTRO Chat Translator")
 
 
 def main():
+    chat = ''
+
+    while True:
+        print("Choose one type of chat to translate:")
+        print("1- World Chat")
+        print("2- IMs")
+        chat = input("Choice: ")
+
+        os.system('cls')
+
+        if chat == '1' or chat == '2':
+            break
+        else:
+            print("Pick one of the valid choices:")
+            print("")
+
     while True:
         path = input("Paste the path to your chat log: ").strip('"')
 
@@ -54,14 +71,22 @@ def main():
     os.system('cls')
 
     processed_timestamps = set()
+    translated_messages = set()
 
     while True:
-        messages = world_chat.return_text_world(path)
+        if chat == '1':
+            messages = world_chat.return_text_world(path)
+            new_translations = world_chat.translate_messages_world(lang, messages, processed_timestamps)
 
-        new_translations = world_chat.translate_messages_world(lang, messages, processed_timestamps)
+            for msg in new_translations:
+                print(msg)
 
-        for msg in new_translations:
-            print(msg)
+        elif chat == '2':
+            messages = IMs_chat.return_text_ims(path)
+            new_translations = IMs_chat.translate_messages_ims(lang, messages, translated_messages)
+
+            for msg in new_translations:
+                print(msg)
 
         time.sleep(0.5)
 
