@@ -4,6 +4,7 @@ import ctypes
 import warnings
 import world_chat
 import IMs_chat
+import fellowship_chat
 
 warnings.filterwarnings("ignore", ".*64-bit application should be automated using 64-bit Python.*")
 
@@ -17,13 +18,15 @@ def main():
         print("Choose one type of chat to translate:")
         print("")
         print("1- World Chat")
-        print("2- IMs")
+        print("2- Fellowship Chat")
+        print("3- Guild Chat")
+        print("4- IMs Chat")
         print("")
         chat = input("Choice: ")
 
         os.system('cls')
 
-        if chat == '1' or chat == '2':
+        if chat == '1' or chat == '2' or chat == '3' or chat == '4':
             break
         else:
             print("Pick one of the valid choices:")
@@ -84,6 +87,13 @@ def main():
                 print(msg)
 
         elif chat == '2':
+            messages = fellowship_chat.return_text_fellowship(path)
+            new_translations = fellowship_chat.translate_messages_fellowship(lang, messages, translated_messages)
+
+            for msg in new_translations:
+                print(msg)
+
+        elif chat == '4':
             messages = IMs_chat.return_text_ims(path)
             new_translations = IMs_chat.translate_messages_ims(lang, messages, translated_messages)
 
