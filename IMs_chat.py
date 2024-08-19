@@ -7,7 +7,7 @@ def return_text_ims(file_path, start_line=None):
 
         if start_line is not None:
             lines = lines[start_line:]
-        last_lines = lines[-10:]
+        last_lines = lines[-6:]
 
     messages = []
 
