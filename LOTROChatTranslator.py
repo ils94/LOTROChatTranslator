@@ -1,114 +1,31 @@
-import time
-import os
-import world_chat
-import IMs_chat
-import fellowship_chat
-import kinship_chat
-import window_config
-
-window_title = 'LOTRO Chat Translator'
-
-window_config.window_always_on_top(window_title)
+import tkinter as tk
+from tkinter import tix
+import create_window
+import center_windows
 
 
-def main():
-    chat = ''
-
-    while True:
-        print("Choose one type of chat to translate:")
-        print("")
-        print("1- World Chat")
-        print("2- Fellowship Chat")
-        print("3- Kinship Chat")
-        print("4- IMs Chat")
-        print("")
-        chat = input("Choice: ")
-
-        os.system('cls')
-
-        if chat == '1' or chat == '2' or chat == '3' or chat == '4':
-            break
-        else:
-            print("Pick one of the valid choices:")
-            print("")
-
-    while True:
-        path = input("Paste the path to your chat log: ").strip('"')
-
-        os.system('cls')
-
-        if os.path.isfile(path):
-            break
-        else:
-            print("Invalid file path. Please enter a valid file path.")
-            print("")
-
-    # Define supported languages
-    supported_languages = {
-        'ar', 'bg', 'ca', 'cs', 'da', 'de', 'el', 'en', 'eo', 'es', 'et', 'fi',
-        'fr', 'ga', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja',
-        'jw', 'kn', 'ko', 'la', 'lv', 'lt', 'mk', 'ml', 'mr', 'my', 'ne', 'no',
-        'oc', 'pl', 'pt', 'pa', 'ro', 'ru', 'sd', 'si', 'sk', 'sl', 'sm', 'sn',
-        'so', 'sq', 'sr', 'st', 'su', 'sv', 'sw', 'ta', 'te', 'tg', 'th', 'tr',
-        'uk', 'ur', 'vi', 'xh', 'yi', 'yo', 'zu'
-    }
-
-    print("Now pick your desired language to translate")
-    print("")
-    print("These are the following languages available:")
-    print("")
-    print(", ".join(supported_languages))
-    print("")
-
-    while True:
-        lang = input("Desired language: ").strip()
-
-        os.system('cls')
-
-        if lang in supported_languages:
-            break
-        else:
-            print(", ".join(supported_languages))
-            print("")
-            print("Unsupported language code. Please choose from the list.")
-            print("")
-
-    os.system('cls')
-
-    processed_timestamps = set()
-    translated_messages = set()
-
-    while True:
-        if chat == '1':
-            messages = world_chat.return_text_world(path)
-            new_translations = world_chat.translate_messages_world(lang, messages, processed_timestamps)
-
-            for msg in new_translations:
-                print(msg)
-
-        elif chat == '2':
-            messages = fellowship_chat.return_text_fellowship(path)
-            new_translations = fellowship_chat.translate_messages_fellowship(lang, messages, translated_messages)
-
-            for msg in new_translations:
-                print(msg)
-
-        elif chat == '3':
-            messages = kinship_chat.return_text_kinship(path)
-            new_translations = kinship_chat.translate_messages_kinship(lang, messages, translated_messages)
-
-            for msg in new_translations:
-                print(msg)
-
-        elif chat == '4':
-            messages = IMs_chat.return_text_ims(path)
-            new_translations = IMs_chat.translate_messages_ims(lang, messages, translated_messages)
-
-            for msg in new_translations:
-                print(msg)
-
-        time.sleep(0.5)
+def create_tooltip(widget, text):
+    balloon = tix.Balloon(widget, initwait=100)
+    balloon.bind_widget(widget, balloonmsg=text)
 
 
-if __name__ == "__main__":
-    main()
+def button_click(button_name):
+    create_window.create_window(button_name)
+
+
+root = tix.Tk()
+root.geometry("250x50")
+root.resizable(False, False)
+root.title("Chat Type")
+
+center_windows.center_window(root, 250, 50)
+
+button_texts = ["Common Chat", "IMs Chat"]
+tooltips = ["Use this for World, Fellowship, Kinship and etc.", "Use this only for IMs Chats (due different Timestamp)"]
+
+for i, (text, tooltip_text) in enumerate(zip(button_texts, tooltips)):
+    button = tk.Button(root, text=text, width=15, command=lambda t=text: button_click(t))
+    button.grid(row=0, column=i, padx=5, pady=10)
+    create_tooltip(button, tooltip_text)
+
+root.mainloop()

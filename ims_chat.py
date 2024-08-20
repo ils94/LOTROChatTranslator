@@ -1,7 +1,7 @@
 from googletrans import Translator
 
 
-def return_text_ims(file_path, start_line=None):
+def return_text(file_path, start_line=None):
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
@@ -23,7 +23,7 @@ def return_text_ims(file_path, start_line=None):
     return messages
 
 
-def translate_messages_ims(lang, messages, translated_messages):
+def translate_messages(lang, messages, translated_messages):
     new_translations = []
     translator = Translator(service_urls=['translate.googleapis.com'])
 

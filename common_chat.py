@@ -1,7 +1,7 @@
 from googletrans import Translator
 
 
-def return_text_kinship(file_path, start_line=None):
+def return_text(file_path, start_line=None):
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
@@ -12,7 +12,7 @@ def return_text_kinship(file_path, start_line=None):
     messages = []
 
     for line in last_lines:
-        if '[To Kinship]' in line or 'has come online.' in line or 'has gone offline.' in line:
+        if '[To' in line or 'You have joined the chat room for your Fellowship, Fellowship chat is now available.' in line or 'has come online.' in line or 'has gone offline.' in line:
             continue
 
         parts = line.split('] ', 1)
@@ -26,7 +26,7 @@ def return_text_kinship(file_path, start_line=None):
     return messages
 
 
-def translate_messages_kinship(lang, messages, processed_timestamps):
+def translate_messages(lang, messages, processed_timestamps):
     playername = ''
     text = ''
 
@@ -39,7 +39,7 @@ def translate_messages_kinship(lang, messages, processed_timestamps):
                 playername, text = message.split(': ', 1)
 
             x = translator.translate(text, dest=lang)
-            translated_message = f"[{timestamp}] {playername}: '{x.text}'"
+            translated_message = f"[{timestamp}] {playername}: {x.text}'"
             processed_timestamps.add(timestamp)
             new_translations.append(translated_message)
 
