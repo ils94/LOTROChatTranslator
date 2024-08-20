@@ -41,7 +41,7 @@ def create_window(window_name):
     def on_enter(event):
         selected_language = language_names[translator_var.get()]
 
-        x = threading.Thread(target=quick_translator.translate_my_message, args=(text2, selected_language))
+        x = threading.Thread(target=quick_translator.translate_my_message, args=(text2, text3, selected_language))
         x.setDaemon(True)
         x.start()
 
@@ -143,11 +143,14 @@ def create_window(window_name):
     text_frame = tk.Frame(toplevel)
     text_frame.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
 
+    text_frame.grid_columnconfigure(0, weight=1)
+    text_frame.grid_columnconfigure(1, weight=1)
+
     chat_text_label = tk.Label(text_frame, text="Chat")
-    chat_text_label.grid(row=0, column=0, sticky="w")
+    chat_text_label.grid(row=0, column=0, sticky="w", columnspan=2)
 
     text1 = tk.Text(text_frame, height=10)
-    text1.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
+    text1.grid(row=1, column=0, padx=5, pady=5, sticky="nsew", columnspan=2)
     text1.configure(state='disabled')
     create_tooltip(text1, "Your translated chat will appear here.")
 
@@ -156,10 +159,16 @@ def create_window(window_name):
 
     text2 = tk.Text(text_frame, height=5)
     text2.grid(row=3, column=0, padx=5, pady=5, sticky="nsew")
-    create_tooltip(text2,
-                   "Type something here, and press ENTER. The typed text will be changed to it's translated version. You can then just paste it (Ctrl + V) on LOTRO chat!")
+    create_tooltip(text2,"Type here to translate your message.")
 
     text2.bind("<Return>", on_enter)
+
+    translated_text_label = tk.Label(text_frame, text="Translated Text")
+    translated_text_label.grid(row=2, column=1, sticky="w")
+
+    text3 = tk.Text(text_frame, height=5)
+    text3.grid(row=3, column=1, padx=5, pady=5, sticky="nsew")
+    create_tooltip(text3, "Your translated text will appear here.")
 
     load_settings()
 
