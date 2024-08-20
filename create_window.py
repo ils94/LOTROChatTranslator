@@ -87,6 +87,9 @@ def create_window(window_name):
     toplevel.attributes("-topmost", True)
     toplevel.title(f"LOTRO Chat Translator: {window_name}")
 
+    if os.path.isfile('icon.ico'):
+        toplevel.iconbitmap('icon.ico')
+
     menu_bar = tk.Menu(toplevel)
     toplevel.config(menu=menu_bar)
 

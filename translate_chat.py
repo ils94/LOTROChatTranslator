@@ -27,7 +27,8 @@ def translate(chat_type, text, path, lang, stop_event):
             text.configure(state='disabled')
             text.yview("end")
 
-            time.sleep(1)
-        except:
-            time.sleep(1)
+            time.sleep(0.5)
+        except Exception as e:
+            print(e)
+            time.sleep(0.5)
             continue

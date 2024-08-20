@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import tix
 import create_window
 import center_windows
+import os
 
 
 def create_tooltip(widget, text):
@@ -17,6 +18,9 @@ root = tix.Tk()
 root.geometry("250x50")
 root.resizable(False, False)
 root.title("Chat Type")
+
+if os.path.isfile('icon.ico'):
+    root.iconbitmap('icon.ico')
 
 center_windows.center_window(root, 250, 50)
 

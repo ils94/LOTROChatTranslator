@@ -19,7 +19,7 @@ def return_text(file_path, start_line=None):
 
         if len(parts) > 1:
             timestamp = parts[0].strip('[] ')
-            player_message = parts[1].strip().strip("'")
+            player_message = parts[1]
 
             messages.append((timestamp, player_message))
 
@@ -39,8 +39,11 @@ def translate_messages(lang, messages, processed_timestamps):
                 playername, text = message.split(': ', 1)
 
             x = translator.translate(text, dest=lang)
-            translated_message = f"[{timestamp}] {playername}: {x.text}'"
+
+            translated_message = f"[{timestamp}] {playername}: {x.text}"
+
             processed_timestamps.add(timestamp)
+
             new_translations.append(translated_message)
 
     return new_translations
