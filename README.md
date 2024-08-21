@@ -47,4 +47,4 @@ You can download the tool from the following link:
 
 ## Video Demo
 
-A video demonstration will be available soon: [Watch Demo](https://streamable.com/uhl4m1)
+Video demonstration: [Watch Demo](https://streamable.com/uhl4m1)
