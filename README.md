@@ -4,7 +4,7 @@ A simple Python program that uses the Google Translate API to translate your *Th
 
 ## Tutorial
 
-For this to work, you will have to enable Timestamps in the game settings.
+For this to work, you will have to enable Chat Timestamps in the game settings.
 
 ### Step 1: Open LOTRO Chat Translator
 
