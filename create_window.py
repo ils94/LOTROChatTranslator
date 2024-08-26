@@ -19,6 +19,29 @@ def create_window(window_name):
     stop_event = threading.Event()
     translation_thread = None
 
+    languages = sorted(language_names.keys())
+
+    def on_keypress(event, combobox, languages):
+        char = event.char.lower()
+        if not char.isalpha():
+            return
+
+        current_selection = combobox.get()
+        if current_selection in languages:
+            start_index = languages.index(current_selection) + 1
+        else:
+            start_index = 0
+
+        for i in range(start_index, len(languages)):
+            if languages[i].lower().startswith(char):
+                combobox.set(languages[i])
+                return
+
+        for i in range(0, start_index):
+            if languages[i].lower().startswith(char):
+                combobox.set(languages[i])
+                return
+
     def create_tooltip(widget, text):
         balloon = tix.Balloon(widget, initwait=500)
         balloon.bind_widget(widget, balloonmsg=text)
@@ -194,5 +217,8 @@ def create_window(window_name):
     text_frame.grid_rowconfigure(1, weight=1)
     text_frame.grid_rowconfigure(3, weight=0)
     text_frame.grid_columnconfigure(0, weight=1)
+
+    chat_combobox.bind("<KeyPress>", lambda event: on_keypress(event, chat_combobox, languages))
+    translator_combobox.bind("<KeyPress>", lambda event: on_keypress(event, translator_combobox, languages))
 
     toplevel.protocol("WM_DELETE_WINDOW", on_closing)
