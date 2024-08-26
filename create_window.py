@@ -20,7 +20,7 @@ def create_window(window_name):
     translation_thread = None
 
     def create_tooltip(widget, text):
-        balloon = tix.Balloon(widget, initwait=100)
+        balloon = tix.Balloon(widget, initwait=500)
         balloon.bind_widget(widget, balloonmsg=text)
 
     def save_settings():
@@ -76,6 +76,14 @@ def create_window(window_name):
         translation_thread.setDaemon(True)
         translation_thread.start()
 
+    def toggle_section():
+        if entry_frame.winfo_viewable():
+            entry_frame.grid_remove()
+            combobox_frame.grid_remove()
+        else:
+            entry_frame.grid()
+            combobox_frame.grid()
+
     def on_closing():
         stop_event.set()
         if translation_thread and translation_thread.is_alive():
@@ -95,6 +103,7 @@ def create_window(window_name):
 
     file_menu = tk.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Menu", menu=file_menu)
+    file_menu.add_command(label="Toggle Settings Panel", command=toggle_section)
     file_menu.add_command(label="Clear Chat", command=clear_chat)
     file_menu.add_command(label="Save Settings", command=save_chat_settings)
 
@@ -159,7 +168,7 @@ def create_window(window_name):
 
     text2 = tk.Text(text_frame, height=5)
     text2.grid(row=3, column=0, padx=5, pady=5, sticky="nsew")
-    create_tooltip(text2,"Type here to translate your message.")
+    create_tooltip(text2, "Type here to translate your message.")
 
     text2.bind("<Return>", on_enter)
 

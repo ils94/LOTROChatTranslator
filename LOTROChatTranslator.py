@@ -6,7 +6,7 @@ import os
 
 
 def create_tooltip(widget, text):
-    balloon = tix.Balloon(widget, initwait=100)
+    balloon = tix.Balloon(widget, initwait=500)
     balloon.bind_widget(widget, balloonmsg=text)
 
 
